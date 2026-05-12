@@ -34,5 +34,5 @@ opencv-python==4.9.0.80
 redis==5.0.1
 
 # Utils
-python-dotenv==1.0.1
+python-dotenv==1.2.2
 aiofiles==23.2.1
