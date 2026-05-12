@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { api } from '../services/api'
 import { useProjectStore } from '../stores/projectStore'
@@ -81,10 +81,6 @@ export default function ProjectEditor() {
     await api.updateScript(slideId, script)
   }
 
-  const handleExport = () => {
-    navigate(`/export/${projectId}`)
-  }
-
   const handleGenerateVideo = async () => {
     if (!projectId || slides.length === 0) return
 
@@ -99,7 +95,7 @@ export default function ProjectEditor() {
       setProgress(40)
 
       // 合成视频
-      const videoResult = await api.compositeVideo(
+      await api.compositeVideo(
         projectId,
         slides.map((s) => s.image_path || ''),
         audios.map((a) => a.audio_path),
@@ -191,7 +187,7 @@ export default function ProjectEditor() {
           {/* Center Panel - Preview / Edit */}
           <div className="col-span-6 space-y-4">
             {slides.length === 0 ? (
-              <PTUploader onUpload={handleFileUpload} isUploading={isGenerating} />
+              <PPTUploader onUpload={handleFileUpload} isUploading={isGenerating} />
             ) : (
               <>
                 {/* Slide Preview */}
